@@ -16,7 +16,24 @@
             echo "database connection failed....!!";
         }
         else{
-            echo "database connection successful....";
+
+            // get form data
+            $email =  trim($_POST['email']);
+            $password =  trim($_POST['password']);
+
+            // verify input credentials
+            $qry = "select * from tbl_user where email='$email' and password= '$password'";
+            $raw = mysqli_query($conn, $qry);
+
+            $count = mysqli_num_rows($raw);
+
+            if($count > 0){
+                echo 'Valid credentials';    // user inputted valid credentials
+            }
+                
+            else{
+                echo 'Invalid credentials';            
+            }
         }
 
     }
